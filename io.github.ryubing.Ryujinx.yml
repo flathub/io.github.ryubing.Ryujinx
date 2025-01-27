@@ -8,81 +8,81 @@ add-extensions:
     directory: lib/ffmpeg
     add-ld-path: .
 finish-args:
-- --share=ipc
-- --socket=x11
-- --device=all
-- --socket=pulseaudio
-- --share=network
-- --filesystem=home:ro
-- --filesystem=xdg-pictures:rw
-- --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --share=ipc
+  - --socket=x11
+  - --device=all
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=home:ro
+  - --filesystem=xdg-pictures:rw
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
 rename-icon: ryujinx
 command: ryujinx-wrapper
 modules:
-- name: Ryujinx
-  buildsystem: simple
-  build-options:
-    arch:
-      x86_64:
-        env:
-          RUNTIME: linux-x64
-      aarch64:
-        env:
-          RUNTIME: linux-arm64
-    env:
-      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
-      RYUJINX_VERSION: 1.2.81
-      RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: flathub
-      RYUJINX_TARGET_RELEASE_CHANNEL_REPO: io.github.ryubing.Ryujinx
-      RYUJINX_TARGET_RELEASE_CHANNEL_NAME: master
-  build-commands:
-  - |
-    export PATH=$PATH:/run/build/Ryujinx/dotnet-sdk
-    export RYUJINX_GIT_SHORT_HASH=$(git rev-parse --short HEAD)
-    export RUNTIME_FRAMEWORK_VERSION=$(find nuget-sources -name 'microsoft.netcore.app.runtime.$RUNTIME.*' | grep -oP '(\d.\d.\d+.nupkg)' | grep -oP '(\d.\d.\d+)')
-    echo "Runtime framework version: $RUNTIME_FRAMEWORK_VERSION"
-    mkdir -p /app/bin
-    dotnet publish -c Release -r $RUNTIME /p:DebugType=embedded src/Ryujinx /p:Version=$RYUJINX_VERSION /p:SourceRevisionId=$RYUJINX_GIT_SHORT_HASH /p:ExtraDefineConstants="DISABLE_UPDATER" /p:RuntimeFrameworkVersion=$RUNTIME_FRAMEWORK_VERSION --self-contained --source nuget-sources
-    if [ $? -ne 0 ]; then
-        exit 1;
-    fi;
-    cp -r --remove-destination /run/build/Ryujinx/src/Ryujinx/bin/Release/net9.0/$RUNTIME/publish/* /app/bin/
-    chmod +x /app/bin/Ryujinx.sh
-    mkdir -p /app/lib/ffmpeg
-    install -Dm644 $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
-    install -Dm755 ryujinx-wrapper /app/bin/ryujinx-wrapper
-    install -Dm644 distribution/misc/Logo.svg /app/share/icons/hicolor/scalable/apps/ryujinx.svg
-    install -Dm644 distribution/linux/mime/Ryujinx.xml /app/share/mime/packages/$FLATPAK_ID.mime.xml
-    install -Dm644 distribution/linux/Ryujinx.desktop /app/share/applications/$FLATPAK_ID.desktop
-    desktop-file-edit --set-name="Ryujinx (Ryubing)" /app/share/applications/$FLATPAK_ID.desktop
-    desktop-file-edit --set-key="Exec" --set-value="ryujinx-wrapper %f" /app/share/applications/$FLATPAK_ID.desktop
-  sources:
-  - type: archive
-    only-arches:
-    - x86_64
-    dest: dotnet-sdk
-    url: https://dotnetcli.azureedge.net/dotnet/Sdk/9.0.101/dotnet-sdk-9.0.101-linux-x64.tar.gz
-    sha256: c2fca3eeccc99936bee987721d075127a6202b3c2474e01c627f9976f0dd5655
-    x-checker-data:
-      type: rotating-url
-      url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-x64.tar.gz
-      pattern: https://dotnetcli.azureedge.net/dotnet/Sdk/^([\d\.a-z-]+)$/dotnet-sdk-^([\d\.a-z-]+)$-linux-x64.tar.gz
-  - type: archive
-    only-arches:
-    - aarch64
-    dest: dotnet-sdk
-    url: https://dotnetcli.azureedge.net/dotnet/Sdk/9.0.101/dotnet-sdk-9.0.101-linux-arm64.tar.gz
-    sha256: 160411c1531059d6318a52e116f2d7a042fcc29f327eac2a305215c1bcbb2e77
-    x-checker-data:
-      type: rotating-url
-      url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm64.tar.gz
-      pattern: https://dotnetcli.azureedge.net/dotnet/Sdk/^([\d\.a-z-]+)$/dotnet-sdk-^([\d\.a-z-]+)$-linux-arm64.tar.gz
-  - nuget_sources.json
-  - type: git
-    url: https://github.com/Ryubing/Ryujinx.git
-    commit: 13d411e4deae65c8ab3e155643037ddb86767594
-  - type: file
-    path: ryujinx-wrapper
-  - type: file
-    path: io.github.ryubing.Ryujinx.appdata.xml
+  - name: Ryujinx
+    buildsystem: simple
+    build-options:
+      arch:
+        x86_64:
+          env:
+            RUNTIME: linux-x64
+        aarch64:
+          env:
+            RUNTIME: linux-arm64
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+        RYUJINX_VERSION: 1.2.81
+        RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: flathub
+        RYUJINX_TARGET_RELEASE_CHANNEL_REPO: io.github.ryubing.Ryujinx
+        RYUJINX_TARGET_RELEASE_CHANNEL_NAME: master
+    build-commands:
+      - |
+        export PATH=$PATH:/run/build/Ryujinx/dotnet-sdk
+        export RYUJINX_GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+        export RUNTIME_FRAMEWORK_VERSION=$(find nuget-sources -name 'microsoft.netcore.app.runtime.$RUNTIME.*' | grep -oP '(\d.\d.\d+.nupkg)' | grep -oP '(\d.\d.\d+)')
+        echo "Runtime framework version: $RUNTIME_FRAMEWORK_VERSION"
+        mkdir -p /app/bin
+        dotnet publish -c Release -r $RUNTIME /p:DebugType=embedded src/Ryujinx /p:Version=$RYUJINX_VERSION /p:SourceRevisionId=$RYUJINX_GIT_SHORT_HASH /p:ExtraDefineConstants="DISABLE_UPDATER" /p:RuntimeFrameworkVersion=$RUNTIME_FRAMEWORK_VERSION --self-contained --source nuget-sources
+        if [ $? -ne 0 ]; then
+            exit 1;
+        fi;
+        cp -r --remove-destination /run/build/Ryujinx/src/Ryujinx/bin/Release/net9.0/$RUNTIME/publish/* /app/bin/
+        chmod +x /app/bin/Ryujinx.sh
+        mkdir -p /app/lib/ffmpeg
+        install -Dm644 $FLATPAK_ID.appdata.xml /app/share/metainfo/$FLATPAK_ID.appdata.xml
+        install -Dm755 ryujinx-wrapper /app/bin/ryujinx-wrapper
+        install -Dm644 distribution/misc/Logo.svg /app/share/icons/hicolor/scalable/apps/ryujinx.svg
+        install -Dm644 distribution/linux/mime/Ryujinx.xml /app/share/mime/packages/$FLATPAK_ID.mime.xml
+        install -Dm644 distribution/linux/Ryujinx.desktop /app/share/applications/$FLATPAK_ID.desktop
+        desktop-file-edit --set-name="Ryujinx (Ryubing)" /app/share/applications/$FLATPAK_ID.desktop
+        desktop-file-edit --set-key="Exec" --set-value="ryujinx-wrapper %f" /app/share/applications/$FLATPAK_ID.desktop
+    sources:
+      - type: archive
+        only-arches:
+          - x86_64
+        dest: dotnet-sdk
+        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.102/dotnet-sdk-9.0.102-linux-x64.tar.gz
+        sha256: da999a5f259509829d7dd311785bf4010535c273913a2e56c664b47c8f586e7a
+        x-checker-data:
+          type: rotating-url
+          url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-x64.tar.gz
+          pattern: https://dotnetcli.azureedge.net/dotnet/Sdk/^([\d\.a-z-]+)$/dotnet-sdk-^([\d\.a-z-]+)$-linux-x64.tar.gz
+      - type: archive
+        only-arches:
+          - aarch64
+        dest: dotnet-sdk
+        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.102/dotnet-sdk-9.0.102-linux-arm64.tar.gz
+        sha256: 272b846ba23aa47fe78b30ed892c2aeb4b0db8f18c3651accaee467fb11e7a4b
+        x-checker-data:
+          type: rotating-url
+          url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm64.tar.gz
+          pattern: https://dotnetcli.azureedge.net/dotnet/Sdk/^([\d\.a-z-]+)$/dotnet-sdk-^([\d\.a-z-]+)$-linux-arm64.tar.gz
+      - nuget_sources.json
+      - type: git
+        url: https://github.com/Ryubing/Ryujinx.git
+        commit: 13d411e4deae65c8ab3e155643037ddb86767594
+      - type: file
+        path: ryujinx-wrapper
+      - type: file
+        path: io.github.ryubing.Ryujinx.appdata.xml
