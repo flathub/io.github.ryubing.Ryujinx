@@ -239,10 +239,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.7.0.2/gommon.2.7.0.2.nupkg",
-    "sha512": "11a665590b09469be2c7dce2d5d3e10ee6eb6401eec8e1e185640707dac78ef33c440566c7c183f16fc6600c665bc13e51924981b48f74b7ecb65ec132eea39e",
+    "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.7.1/gommon.2.7.1.nupkg",
+    "sha512": "4ff3f5cafed23febfc540908ea52072476f36455a984cdcb24e909e893cd8d56a508d6b6819af9ae02f126ef613ed57e05d774b588d13e1299f0916d898fb27d",
     "dest": "nuget-sources",
-    "dest-filename": "gommon.2.7.0.2.nupkg"
+    "dest-filename": "gommon.2.7.1.nupkg"
   },
   {
     "type": "file",

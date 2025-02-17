@@ -11,9 +11,9 @@
         <category>Game</category>
     </categories>
     <description>
+        <p><em>This is an unofficial third-party package. Please don't report Flatpak-specific issues to the developers.</em></p>
         <p>Ryujinx is an open-source Nintendo Switch emulator written in C#. This is a fork of the original project created by gdkchan.</p>
         <p>This emulator aims at providing excellent accuracy and performance, a user-friendly interface, and consistent builds.</p>
-        <p><em>This is an unofficial third-party package. Please don't report Flatpak-specific issues to the developers.</em></p>
     </description>
     <branding>
       <color type="primary" scheme_preference="light">#ff8351</color>
@@ -51,6 +51,16 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="1.2.82" date="2025-02-17">
+            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.82</url>
+            <description>
+                <ul>
+                    <li>DualSense/DualShock 4 LED customization</li>
+                    <li>Faster start times for modded games</li>
+                    <li>Dynamic Discord Rich Presence support for some games</li>
+                </ul> 
+            </description>
+        </release>
         <release version="1.2.81" date="2025-01-23">
             <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.81</url>
             <description>
