@@ -51,6 +51,16 @@
         </screenshot>
     </screenshots>
     <releases>
+        <release version="1.2.86" date="2025-03-13">
+            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.86</url>
+            <description>
+                <ul>
+                    <li>Cleaned up user interface</li>
+                    <li>Added per-game configurations</li>
+                    <li>Improved cutscene quality in some games</li>
+                </ul> 
+            </description>
+        </release>
         <release version="1.2.82" date="2025-02-17">
             <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.82</url>
             <description>

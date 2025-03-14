@@ -239,10 +239,10 @@
   },
   {
     "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.7.1/gommon.2.7.1.nupkg",
-    "sha512": "4ff3f5cafed23febfc540908ea52072476f36455a984cdcb24e909e893cd8d56a508d6b6819af9ae02f126ef613ed57e05d774b588d13e1299f0916d898fb27d",
+    "url": "https://api.nuget.org/v3-flatcontainer/gommon/2.7.1.1/gommon.2.7.1.1.nupkg",
+    "sha512": "2544f8ee0b68ab218d28bb4ee6fd2a37daaafa1cef063b57edf9104a70d626087935d9b7e04887a619900293231ca0b7dec396752e84b9539d34dd32204021a4",
     "dest": "nuget-sources",
-    "dest-filename": "gommon.2.7.1.nupkg"
+    "dest-filename": "gommon.2.7.1.1.nupkg"
   },
   {
     "type": "file",
@@ -1251,13 +1251,6 @@
     "sha512": "04ae2e3da77b5ae29e795291372ca63dcb90534043cbc432f25b72383832a0f010f0e346e7d022a1fb42068c7ec300e37c3592389607c36219847bbb060e2fc5",
     "dest": "nuget-sources",
     "dest-filename": "shaderc.net.0.1.0.nupkg"
-  },
-  {
-    "type": "file",
-    "url": "https://api.nuget.org/v3-flatcontainer/sharpmetal/1.0.0-preview21/sharpmetal.1.0.0-preview21.nupkg",
-    "sha512": "4434abb6d993f214129ca93a897751b35b16edcc394a554bac5f7766540b4ac37bf799a5f585f33506565531ea347a2612e3418db1e39784fcfaa0eba84ad1b3",
-    "dest": "nuget-sources",
-    "dest-filename": "sharpmetal.1.0.0-preview21.nupkg"
   },
   {
     "type": "file",
