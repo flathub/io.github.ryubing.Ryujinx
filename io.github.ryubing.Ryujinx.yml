@@ -80,8 +80,8 @@ modules:
           pattern: https://dotnetcli.azureedge.net/dotnet/Sdk/^([\d\.a-z-]+)$/dotnet-sdk-^([\d\.a-z-]+)$-linux-arm64.tar.gz
       - nuget_sources.json
       - type: git
-        url: https://github.com/Ryubing/Ryujinx.git
-        commit: 05b4bd8c61b9ee9b1d471f0ccf5309d9f478dcba
+        url: https://git.ryujinx.app/ryubing/ryujinx.git
+        commit: ddc00cf2d8774a676c96d87c11ad2bf738c45ee2
       - type: file
         path: ryujinx-wrapper
       - type: file

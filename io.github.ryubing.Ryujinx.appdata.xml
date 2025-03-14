@@ -28,14 +28,14 @@
         <mediatype>application/x-nx-nsp</mediatype>
         <mediatype>application/x-nx-xci</mediatype>
     </provides>
-    <url type="homepage">https://github.com/Ryubing/Ryujinx</url>
-    <url type="bugtracker">https://github.com/Ryubing/Ryujinx/issues</url>
-    <url type="faq">https://github.com/Ryubing/Ryujinx/wiki/FAQ-and-Troubleshooting#frequently-asked-questions</url>
-    <url type="help">https://github.com/Ryubing/Ryujinx/wiki/Ryujinx-Setup-%26-Configuration-Guide</url>
+    <url type="homepage">https://git.ryujinx.app/ryubing/ryujinx</url>
+    <url type="bugtracker">https://git.ryujinx.app/ryubing/ryujinx/-/issues</url>
+    <url type="faq">https://git.ryujinx.app/ryubing/ryujinx/-/wikis/FAQ-%26-Troubleshooting#frequently-asked-questions</url>
+    <url type="help">https://git.ryujinx.app/ryubing/ryujinx/-/wikis/Setup-%26-Configuration-Guide</url>
     <screenshots>
         <screenshot type="default">
             <caption>Main screen</caption>
-            <image>https://raw.githubusercontent.com/Ryubing/Ryujinx/13d411e4deae65c8ab3e155643037ddb86767594/docs/shell.png</image>
+            <image>https://git.ryujinx.app/ryubing/ryujinx/-/blob/350b1fc01336ea0b2199a2cfa88389cc10130ef3/docs/shell.png</image>
         </screenshot>
         <screenshot>
             <caption>The Legend of Zelda: Breath of the Wild running in fullscreen on Ryujinx</caption>
@@ -52,7 +52,7 @@
     </screenshots>
     <releases>
         <release version="1.2.86" date="2025-03-13">
-            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.86</url>
+            <url type="details">https://git.ryujinx.app/ryubing/ryujinx/-/releases/1.2.86</url>
             <description>
                 <ul>
                     <li>Cleaned up user interface</li>
@@ -62,7 +62,7 @@
             </description>
         </release>
         <release version="1.2.82" date="2025-02-17">
-            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.82</url>
+            <url type="details">https://git.ryujinx.app/ryubing/ryujinx/-/releases/1.2.82</url>
             <description>
                 <ul>
                     <li>DualSense/DualShock 4 LED customization</li>
@@ -72,7 +72,7 @@
             </description>
         </release>
         <release version="1.2.81" date="2025-01-23">
-            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.81</url>
+            <url type="details">https://web.archive.org/web/20250302064257/https://github.com/Ryubing/Ryujinx/releases/tag/1.2.81</url>
             <description>
                 <ul>
                     <li>Added ability to dump DLC RomFS</li>
@@ -81,7 +81,7 @@
             </description>
         </release>
         <release version="1.2.80" date="2025-01-20">
-            <url type="details">https://github.com/Ryubing/Ryujinx/releases/tag/1.2.80</url>
+            <url type="details">https://web.archive.org/web/20250302064257/https://github.com/Ryubing/Ryujinx/releases/tag/1.2.80</url>
             <description>
                 <ul>
                     <li>Migrated to .NET 9</li>
