@@ -28,14 +28,14 @@
         <mediatype>application/x-nx-nsp</mediatype>
         <mediatype>application/x-nx-xci</mediatype>
     </provides>
-    <url type="homepage">https://git.ryujinx.app/ryubing/ryujinx</url>
+    <url type="homepage">https://ryujinx.app</url>
     <url type="bugtracker">https://git.ryujinx.app/ryubing/ryujinx/-/issues</url>
     <url type="faq">https://git.ryujinx.app/ryubing/ryujinx/-/wikis/FAQ-%26-Troubleshooting#frequently-asked-questions</url>
     <url type="help">https://git.ryujinx.app/ryubing/ryujinx/-/wikis/Setup-%26-Configuration-Guide</url>
     <screenshots>
         <screenshot type="default">
             <caption>Main screen</caption>
-            <image>https://git.ryujinx.app/ryubing/ryujinx/-/blob/350b1fc01336ea0b2199a2cfa88389cc10130ef3/docs/shell.png</image>
+            <image>https://git.ryujinx.app/ryubing/ryujinx/-/raw/350b1fc01336ea0b2199a2cfa88389cc10130ef3/docs/shell.png</image>
         </screenshot>
         <screenshot>
             <caption>The Legend of Zelda: Breath of the Wild running in fullscreen on Ryujinx</caption>
