@@ -1,10 +1,10 @@
 app-id: io.github.ryubing.Ryujinx
 runtime: org.freedesktop.Platform
-runtime-version: "24.08"
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
-    version: "24.08"
+    version: '24.08'
     directory: lib/ffmpeg
     add-ld-path: .
 finish-args:
@@ -30,8 +30,8 @@ modules:
           env:
             RUNTIME: linux-arm64
       env:
-        DOTNET_CLI_TELEMETRY_OPTOUT: "true"
-        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+        DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
         RYUJINX_VERSION: 1.2.86
         RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: flathub
         RYUJINX_TARGET_RELEASE_CHANNEL_REPO: io.github.ryubing.Ryujinx
@@ -62,8 +62,8 @@ modules:
         only-arches:
           - x86_64
         dest: dotnet-sdk
-        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.200/dotnet-sdk-9.0.200-linux-x64.tar.gz
-        sha256: c07281a0abbd2c3200e70fc94d374baeadfbb43c9c3fe90c6038253555b84335
+        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.203/dotnet-sdk-9.0.203-linux-x64.tar.gz
+        sha256: c7e99b0060a274f31a29ec5e159c7133478bb30dca0366e1c5617976e6de23a3
         x-checker-data:
           type: rotating-url
           url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-x64.tar.gz
@@ -72,8 +72,8 @@ modules:
         only-arches:
           - aarch64
         dest: dotnet-sdk
-        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.200/dotnet-sdk-9.0.200-linux-arm64.tar.gz
-        sha256: 3266045a9b8a5362dca0e148a263385e9ae94920d6f2f56802ad2d5996988bab
+        url: https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.203/dotnet-sdk-9.0.203-linux-arm64.tar.gz
+        sha256: 59f82b35c81afacf740c73b73972c3a5aa7d091538ee8f2ffc36a6a3824d589a
         x-checker-data:
           type: rotating-url
           url: https://aka.ms/dotnet/9.0/dotnet-sdk-linux-arm64.tar.gz
