@@ -39,18 +39,29 @@
         </screenshot>
         <screenshot>
             <caption>The Legend of Zelda: Breath of the Wild running in fullscreen on Ryujinx</caption>
-            <image>https://raw.githubusercontent.com/tancop/flathub/5c2cf9c4a5bf4120095ed99803b6d3e0e617f59d/screenshots/01.jpg</image>
+            <image>https://cdn.jsdelivr.net/gh/flathub/io.github.ryubing.Ryujinx/screenshots/01.jpg</image>
         </screenshot>
         <screenshot>
             <caption>Metroid Dread running in fullscreen on Ryujinx</caption>
-            <image>https://raw.githubusercontent.com/tancop/flathub/5c2cf9c4a5bf4120095ed99803b6d3e0e617f59d/screenshots/02.jpg</image>
+            <image>https://cdn.jsdelivr.net/gh/flathub/io.github.ryubing.Ryujinx/screenshots/02.jpg</image>
         </screenshot>
         <screenshot>
             <caption>Pokémon Legends: Arceus in fullscreen on Ryujinx</caption>
-            <image>https://raw.githubusercontent.com/tancop/flathub/5c2cf9c4a5bf4120095ed99803b6d3e0e617f59d/screenshots/03.jpg</image>
+            <image>https://cdn.jsdelivr.net/gh/flathub/io.github.ryubing.Ryujinx/screenshots/03.jpg</image>
         </screenshot>
     </screenshots>
     <releases>
+        <release version="1.3.1" date="2025-04-24">
+            <url type="details">https://git.ryujinx.app/ryubing/ryujinx/-/releases/1.3.1</url>
+            <description>
+                <p>Major changes</p>
+                <ul>
+                    <li>ARM Windows support &amp; FFmpeg update (by @KeatonTheBot)</li>
+                    <li>Virtual dual Joy-Con support (by @madwind)</li>
+                    <li>Turbo Mode (originally by @nico-abram)</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.2.86" date="2025-03-13">
             <url type="details">https://git.ryujinx.app/ryubing/ryujinx/-/releases/1.2.86</url>
             <description>
