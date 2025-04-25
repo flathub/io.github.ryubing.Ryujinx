@@ -21,15 +21,14 @@ build-options:
   prepend-pkg-config-path: /usr/lib/sdk/dotnet9/lib/pkgconfig
 
 finish-args:
-  # Wayland/X11
+  # X11 - Avalonia doesn't yet support Wayland https://github.com/AvaloniaUI/Avalonia/issues/1243
   - --share=ipc
-  - --socket=wayland
-  - --socket=fallback-x11
+  - --socket=x11
   # Controllers, audio and networking for online connectivity
   - --device=all
   - --socket=pulseaudio
   - --share=network
-  # Browsing large through a portal is slow
+  # Browsing large directories through a portal is slow
   - --filesystem=home:ro
   # Screenshot path
   - --filesystem=xdg-pictures:rw
@@ -37,11 +36,6 @@ finish-args:
   - --filesystem=xdg-run/app/com.discordapp.Discord:create
 
 modules:
-  - name: dotnet-setup
-    buildsystem: simple
-    build-commands:
-      - /usr/lib/sdk/dotnet9/bin/install.sh
-
   - name: ryujinx
     buildsystem: simple
     build-options:
@@ -55,30 +49,21 @@ modules:
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: "true"
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
-    build-commands:
-      - mkdir -p /app/bin
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_VERSION\%\%/$(git describe --tags)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_BUILD_GIT_HASH\%\%/$(git rev-parse --short HEAD)/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_NAME\%\%/main/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_OWNER\%\%/flathub/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_SOURCE_REPO\%\%/io.github.ryubing.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place "s/\%\%RYUJINX_TARGET_RELEASE_CHANNEL_REPO\%\%/io.github.ryubing.ryujinx/g;" src/Ryujinx.Common/ReleaseInformation.cs
-      - sed -r --in-place 's/\%\%RYUJINX_CONFIG_FILE_NAME\%\%/Config\.json/g;' src/Ryujinx.Common/ReleaseInformation.cs
-      - >
-        dotnet publish src/Ryujinx/Ryujinx.csproj -c Release -r $RUNTIME -property:DebugType=embedded -property:Platform=anyCPU
-        -property:Version=$(git describe --tags) -property:SourceRevisionId=$(git rev-parse --short HEAD)
-        -property:ExtraDefineConstants=DISABLE_UPDATER --self-contained --source nuget-sources
-      - cp -r --remove-destination ${FLATPAK_BUILDER_BUILDDIR}/src/Ryujinx/bin/Release/net9.0/$RUNTIME/publish/* /app/bin/
-      - chmod +x /app/bin/Ryujinx.sh
-      - mkdir -p /app/lib/ffmpeg
-      - install -vDm644 $FLATPAK_ID.metainfo.xml /app/share/metainfo/$FLATPAK_ID.metainfo.xml
-      - install -vDm755 ryujinx-wrapper /app/bin/ryujinx-wrapper
-      - install -vDm644 distribution/misc/Logo.svg /app/share/icons/hicolor/scalable/apps/Ryujinx.svg
-      - install -vDm644 distribution/linux/mime/Ryujinx.xml /app/share/mime/packages/$FLATPAK_ID.mime.xml
-      - install -vDm644 distribution/linux/Ryujinx.desktop /app/share/applications/$FLATPAK_ID.desktop
-      - desktop-file-edit --set-name="Ryujinx" /app/share/applications/$FLATPAK_ID.desktop
-      - desktop-file-edit --set-key="Exec" --set-value="ryujinx-wrapper %f" /app/share/applications/$FLATPAK_ID.desktop
+        RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: flathub
+        RYUJINX_TARGET_RELEASE_CHANNEL_REPO: io.github.ryubing.Ryujinx
+        RYUJINX_TARGET_RELEASE_CHANNEL_SOURCE_REPO: io.github.ryubing.Ryujinx
+        RYUJINX_TARGET_RELEASE_CHANNEL_NAME: master
+        RYUJINX_CONFIG_FILE_NAME: Config.json
     sources:
+      - type: script
+        dest-filename: ryujinx-wrapper
+        commands:
+          - for i in {0..9}; do
+          -   test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$i;
+          - done
+          - exec Ryujinx.sh "$@"
+      - type: file
+        path: io.github.ryubing.Ryujinx.metainfo.xml
       - extra-sources.json
       - nuget-sources.json
       - type: git
@@ -88,7 +73,23 @@ modules:
           type: anitya
           project-id: 377871
           stable-only: true
-      - type: file
-        path: ryujinx-wrapper
-      - type: file
-        path: io.github.ryubing.Ryujinx.metainfo.xml
+    build-commands:
+      - >
+        dotnet publish src/Ryujinx/Ryujinx.csproj -c Release -r $RUNTIME -property:DebugType=embedded -property:Platform=anyCPU
+        -property:Version=$(git describe --tags) -property:SourceRevisionId=$(git rev-parse --short HEAD)
+        -property:ExtraDefineConstants=DISABLE_UPDATER --self-contained --source nuget-sources
+    post-install:
+      # Install Ryujinx and launcher scripts
+      - mkdir -p /app/bin
+      - cp -r --remove-destination ${FLATPAK_BUILDER_BUILDDIR}/src/Ryujinx/bin/Release/net9.0/$RUNTIME/publish/* /app/bin/
+      - install -vDm755 ryujinx-wrapper /app/bin/ryujinx-wrapper
+      - chmod +x /app/bin/Ryujinx.sh
+      # Create ffmpeg extension point
+      - mkdir -p /app/lib/ffmpeg
+      # Install and set up metadata
+      - install -vDm644 $FLATPAK_ID.metainfo.xml /app/share/metainfo/$FLATPAK_ID.metainfo.xml
+      - install -vDm644 distribution/misc/Logo.svg /app/share/icons/hicolor/scalable/apps/Ryujinx.svg
+      - install -vDm644 distribution/linux/mime/Ryujinx.xml /app/share/mime/packages/$FLATPAK_ID.mime.xml
+      - install -vDm644 distribution/linux/Ryujinx.desktop /app/share/applications/$FLATPAK_ID.desktop
+      - desktop-file-edit --set-name="Ryujinx" /app/share/applications/$FLATPAK_ID.desktop
+      - desktop-file-edit --set-key="Exec" --set-value="ryujinx-wrapper %f" /app/share/applications/$FLATPAK_ID.desktop
